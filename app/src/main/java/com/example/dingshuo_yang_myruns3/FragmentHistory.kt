@@ -10,12 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
-class FragmentHistory: Fragment() {
+class FragmentHistory : Fragment() {
     private lateinit var myListView: ListView
 
     private lateinit var arrayList: ArrayList<ExerciseEntry>
     private lateinit var arrayAdapter: HistoryListAdapter
 
+    // Reference: The following DB codes are learned and derived from lecture tutorial
     private lateinit var database: ExerciseEntryDatabase
     private lateinit var databaseDao: ExerciseEntryDatabaseDao
     private lateinit var repository: ExerciseEntryRepository
@@ -23,8 +24,10 @@ class FragmentHistory: Fragment() {
     private lateinit var exerciseEntryViewModel: ExerciseEntryViewModel
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.fragment_history, container, false)
         myListView = view.findViewById(R.id.history_list)
 
@@ -37,18 +40,24 @@ class FragmentHistory: Fragment() {
         databaseDao = database.exerciseEntryDatabaseDao
         repository = ExerciseEntryRepository(databaseDao)
         viewModelFactory = ExerciseEntryViewModelFactory(repository)
-        exerciseEntryViewModel = ViewModelProvider(requireActivity(), viewModelFactory)[ExerciseEntryViewModel::class.java]
+        exerciseEntryViewModel = ViewModelProvider(
+            requireActivity(),
+            viewModelFactory
+        )[ExerciseEntryViewModel::class.java]
 
-        exerciseEntryViewModel.allExerciseEntriesLiveData.observe(requireActivity(), Observer { it ->
-            arrayAdapter.replace(it)
-            arrayAdapter.notifyDataSetChanged()
-        })
+        exerciseEntryViewModel.allExerciseEntriesLiveData.observe(
+            requireActivity(),
+            Observer { it ->
+                arrayAdapter.replace(it)
+                arrayAdapter.notifyDataSetChanged()
+            })
 
         return view
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d("dbgg", "on FragmentHistory esume: $arrayList")
+        // Force the adapter to refresh the list
+        arrayAdapter.notifyDataSetChanged()
     }
 }

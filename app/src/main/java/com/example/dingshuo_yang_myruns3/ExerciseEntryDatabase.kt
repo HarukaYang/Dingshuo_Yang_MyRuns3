@@ -5,6 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
+// Reference: The following codes are learned from lecture tutorial
+
 @Database(entities = [ExerciseEntry::class], version = 1)
 abstract class ExerciseEntryDatabase : RoomDatabase() { //XD: Room automatically generates implementations of your abstract ExerciseEntryDatabase class.
     abstract val exerciseEntryDatabaseDao: ExerciseEntryDatabaseDao

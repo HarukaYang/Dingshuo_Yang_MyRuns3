@@ -32,9 +32,8 @@ class FragmentStart : Fragment() {
 
         startButton.setOnClickListener {
             val selectedActivityType = activityTypeSpinner.selectedItem.toString()
-            val selectedInputType = inputTypeSpinner.selectedItem.toString()
 
-            val intent = when (selectedInputType) {
+            val intent = when (inputTypeSpinner.selectedItem.toString()) {
                 "Manual Entry" -> Intent(activity, ManualInputActivity::class.java)
                 "GPS", "Automatic" -> Intent(activity, MapDisplayActivity::class.java)
                 // Show mainActivity if error occurs that no entry is matched (although it is unlikely).

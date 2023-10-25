@@ -5,10 +5,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-
-//A Repository manages queries and allows you to use multiple backends.
-// In the most common example, the Repository implements the logic for
-// deciding whether to fetch data from a network or use results cached in a local database.
+// Reference: Some of the following codes are learned and derived from lecture tutorial and practice code examples
 class ExerciseEntryRepository(private val exerciseEntryDatabaseDao: ExerciseEntryDatabaseDao) {
 
     val allExerciseEntries: Flow<List<ExerciseEntry>> = exerciseEntryDatabaseDao.getAllExerciseEntries()

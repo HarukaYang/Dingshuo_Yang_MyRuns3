@@ -64,9 +64,8 @@ class ManualInputActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
         )
         listView.adapter = adapter
 
-        listView.setOnItemClickListener { parent, view, position, id ->
-            val selectedItem = parent.getItemAtPosition(position).toString()
-            when (selectedItem) {
+        listView.setOnItemClickListener { parent, _, position, _ ->
+            when (parent.getItemAtPosition(position).toString()) {
                 "Date" -> {
                     val datePicker = DialogFragmentDatePicker()
                     datePicker.show(supportFragmentManager, "datePicker")

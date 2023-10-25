@@ -8,6 +8,7 @@ import androidx.room.TypeConverters
 import com.google.android.gms.maps.model.LatLng
 import java.util.Calendar
 
+// Reference: The following codes are learned from lecture tutorial
 @Entity(tableName = "exercise_entry_table")
 @TypeConverters(Converters::class)
 data class ExerciseEntry(

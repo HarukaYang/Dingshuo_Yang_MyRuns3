@@ -11,6 +11,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
+// Reference: Some of the following codes are learned and derived from lecture tutorial
 class ExerciseEntryViewModel(private val repository: ExerciseEntryRepository) : ViewModel() {
     val allExerciseEntriesLiveData: LiveData<List<ExerciseEntry>> =
         repository.allExerciseEntries.asLiveData()
@@ -24,7 +25,7 @@ class ExerciseEntryViewModel(private val repository: ExerciseEntryRepository) : 
     fun deleteFirst() {
         viewModelScope.launch(Dispatchers.IO) {
             val exerciseEntryList = allExerciseEntriesLiveData.value
-            if (exerciseEntryList != null && exerciseEntryList.size > 0) {
+            if (!exerciseEntryList.isNullOrEmpty()) {
                 val id = exerciseEntryList[0].id
                 repository.delete(id)
             }
@@ -34,7 +35,7 @@ class ExerciseEntryViewModel(private val repository: ExerciseEntryRepository) : 
     fun deleteAll() {
         viewModelScope.launch(Dispatchers.IO) {
             val exerciseEntryList = allExerciseEntriesLiveData.value
-            if (exerciseEntryList != null && exerciseEntryList.size > 0)
+            if (!exerciseEntryList.isNullOrEmpty())
                 repository.deleteAll()
         }
     }
