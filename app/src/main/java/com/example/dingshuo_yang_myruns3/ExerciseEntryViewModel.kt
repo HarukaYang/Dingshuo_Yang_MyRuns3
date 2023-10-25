@@ -1,13 +1,7 @@
 package com.example.dingshuo_yang_myruns3
 
 import androidx.lifecycle.*
-
-import android.app.Application
-import android.util.Log
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
@@ -27,6 +21,16 @@ class ExerciseEntryViewModel(private val repository: ExerciseEntryRepository) : 
             val exerciseEntryList = allExerciseEntriesLiveData.value
             if (!exerciseEntryList.isNullOrEmpty()) {
                 val id = exerciseEntryList[0].id
+                repository.delete(id)
+            }
+        }
+    }
+
+    fun deleteEntry(position: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val exerciseEntryList = allExerciseEntriesLiveData.value
+            if (!exerciseEntryList.isNullOrEmpty()) {
+                val id = exerciseEntryList[position].id
                 repository.delete(id)
             }
         }

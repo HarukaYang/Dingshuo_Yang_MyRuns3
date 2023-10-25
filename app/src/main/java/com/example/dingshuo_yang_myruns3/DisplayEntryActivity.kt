@@ -2,6 +2,7 @@ package com.example.dingshuo_yang_myruns3
 
 import android.content.Context
 import android.os.Bundle
+import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -11,6 +12,8 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 class DisplayEntryActivity : AppCompatActivity() {
+
+    private lateinit var deleteButton:Button
 
     private lateinit var inputTypeEditText: EditText
     private lateinit var activityTypeEditText: EditText
@@ -31,6 +34,7 @@ class DisplayEntryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display_entry)
+        deleteButton = findViewById(R.id.delete_button)
 
         database = ExerciseEntryDatabase.getInstance(this)
         databaseDao = database.exerciseEntryDatabaseDao
@@ -55,6 +59,7 @@ class DisplayEntryActivity : AppCompatActivity() {
             this,
             Observer { exerciseEntryList ->
                 val currentEntry = exerciseEntryList[position]
+
                 // Map the data values to view texts
                 val inputType: String = when (currentEntry.inputType) {
                     0 -> "Manual Entry"
@@ -88,7 +93,7 @@ class DisplayEntryActivity : AppCompatActivity() {
                 dateTimeEditText.setText(formattedDateTime)
 
                 // Concatenate strings to form the entry titles
-                val entryLabel = "$inputType $activityType $formattedDateTime"
+                val entryLabel = "$formattedDateTime"
                 dateTimeEditText.setText(entryLabel)
 
                 val distance = when(unitInUse) {
@@ -117,7 +122,17 @@ class DisplayEntryActivity : AppCompatActivity() {
                 heartRateEditText.setText(heartRate)
             })
 
+        // Set delete button onClick behavior
+        deleteButton.setOnClickListener{
+            exerciseEntryViewModel.deleteEntry(position)
 
+            // When deleting without the following line, the observer will immediately update the LiveData to show the data of the next entry, because the current one has just been destroyed.
+            // In order to not show the next entry, the observer in this activity is immediately removed after the deletion (there is only one observer in this activity, so this should be safe).
+            // So that the entry remains until the activity complete finishing.
+            // Reference: this approach for this fix and learning about the removeObservers() method is learned by using ChatGPT.
+            exerciseEntryViewModel.allExerciseEntriesLiveData.removeObservers(this)
+            finish()
+        }
     }
 
 }
