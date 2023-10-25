@@ -1,0 +1,32 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_entry_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Entry Label Data Not Received Yet"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_entry_label"
+        android:layout_marginTop="10dp"
+        android:text="Distance"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_distance"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/tv_distance"
+        android:text="Duration"
+        android:textSize="16sp" />
+</RelativeLayout>
