@@ -28,7 +28,13 @@ class DialogFragmentDuration : DialogFragment() {
                 val input = editText.text
                 // Learned from: https://stackoverflow.com/questions/71005970/how-to-access-the-properties-of-the-host-activity-from-a-fragment-dialog-kotlin
                 if (input.isNotEmpty()) {
-                    (activity as? OnDurationSetListener)?.onDurationSet(input.toString().toDouble())
+                    if (input.toString() == ".") {
+                        (activity as? OnDurationSetListener)?.onDurationSet(0.0)
+                    } else {
+                        (activity as? OnDurationSetListener)?.onDurationSet(
+                            input.toString().toDouble()
+                        )
+                    }
                 }
             }
             .setNegativeButton("CANCEL") { dialog, _ ->

@@ -12,6 +12,7 @@ class DialogFragmentHeartRate : DialogFragment() {
     interface OnHeartRateSetListener {
         fun onHeartRateSet(heartRate: Double)
     }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireActivity())
         val inflater = requireActivity().layoutInflater
@@ -25,7 +26,15 @@ class DialogFragmentHeartRate : DialogFragment() {
                 // Safety guard in case the user does not input anything
                 val input = editText.text
                 if (input.isNotEmpty()) {
-                    (activity as? DialogFragmentHeartRate.OnHeartRateSetListener)?.onHeartRateSet(input.toString().toDouble())
+                    if (input.toString() == ".") {
+                        (activity as? OnHeartRateSetListener)?.onHeartRateSet(
+                            0.0
+                        )
+                    } else {
+                        (activity as? OnHeartRateSetListener)?.onHeartRateSet(
+                            input.toString().toDouble()
+                        )
+                    }
                 }
             }
             .setNegativeButton("CANCEL") { dialog, _ ->

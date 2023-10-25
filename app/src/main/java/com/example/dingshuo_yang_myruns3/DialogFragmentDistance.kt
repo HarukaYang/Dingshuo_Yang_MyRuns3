@@ -26,9 +26,13 @@ class DialogFragmentDistance : DialogFragment() {
                 // Safety guard in case the user does not input anything
                 val input = editText.text
                 if (input.isNotEmpty()) {
-                    (activity as? DialogFragmentDistance.OnDistanceSetListener)?.onDistanceSet(
-                        input.toString().toDouble()
-                    )
+                    if (input.toString() == ".") {
+                        (activity as? OnDistanceSetListener)?.onDistanceSet(0.0)
+                    } else {
+                        (activity as? OnDistanceSetListener)?.onDistanceSet(
+                            input.toString().toDouble()
+                        )
+                    }
                 }
             }
             .setNegativeButton("CANCEL") { dialog, _ ->

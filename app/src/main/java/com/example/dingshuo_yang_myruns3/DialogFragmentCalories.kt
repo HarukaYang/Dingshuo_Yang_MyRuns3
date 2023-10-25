@@ -25,8 +25,11 @@ class DialogFragmentCalorie : DialogFragment() {
                 // Safety guard in case the user does not input anything
                 val input = editText.text
                 if (input.isNotEmpty()) {
-                    (activity as? DialogFragmentCalorie.OnCalorieSetListener)?.onCalorieSet(input.toString().toDouble())
-                }
+                    if (input.toString() == ".") {
+                        (activity as? OnCalorieSetListener)?.onCalorieSet(0.0)
+                    } else {
+                    (activity as? OnCalorieSetListener)?.onCalorieSet(input.toString().toDouble())
+                }}
             }
             .setNegativeButton("CANCEL") { dialog, _ ->
                 dialog.cancel()

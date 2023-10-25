@@ -12,21 +12,12 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tv_distance"
+        android:id="@+id/tv_distance_duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_entry_label"
         android:layout_marginTop="10dp"
-        android:text="Distance"
+        android:text="Distance, duration"
         android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/tv_duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/tv_distance"
-        android:layout_marginStart="10dp"
-        android:layout_toEndOf="@+id/tv_distance"
-        android:text="Duration"
-        android:textSize="16sp" />
 </RelativeLayout>

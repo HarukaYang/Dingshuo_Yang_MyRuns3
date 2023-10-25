@@ -157,11 +157,11 @@ class ProfileActivity : AppCompatActivity() {
 
         // Get Uri for profile photo
         profilePhotoUri =
-            FileProvider.getUriForFile(this, "com.example.dingshuo_yang_myruns2", profilePhotoFile)
+            FileProvider.getUriForFile(this, "com.example.dingshuo_yang_myruns3", profilePhotoFile)
         tempProfilePhotoUri =
             FileProvider.getUriForFile(
                 this,
-                "com.example.dingshuo_yang_myruns2",
+                "com.example.dingshuo_yang_myruns3",
                 tempProfilePhotoFile
             )
 
@@ -204,7 +204,7 @@ class ProfileActivity : AppCompatActivity() {
                         // Update tempProfilePhotoUri to point to the new temp file
                         tempProfilePhotoUri = FileProvider.getUriForFile(
                             this,
-                            "com.example.dingshuo_yang_myruns2",
+                            "com.example.dingshuo_yang_myruns3",
                             tempProfilePhotoFile
                         )
                     }

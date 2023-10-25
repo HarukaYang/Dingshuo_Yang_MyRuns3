@@ -109,7 +109,6 @@ class ManualInputActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
         saveButton = findViewById(R.id.save_button)
         cancelButton = findViewById(R.id.cancel_button)
 
-        // Placeholder buttons as behavior is not required in MyRuns2
         saveButton.setOnClickListener {
             exerciseEntryViewModel.insert(exerciseEntry)
             finish()
